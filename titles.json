@@ -1,0 +1,12 @@
+[
+  { "title": "Intro to Node.js", "details": "Explain what Node.js is with a simple Express example" },
+  { "title": "Getting Started with JavaScript", "details": "Overview of syntax, variables, and data types" },
+  { "title": "Understanding APIs", "details": "Explain REST APIs in simple words" },
+  { "title": "Beginner’s Guide to React", "details": "What is React, basic component example" },
+  { "title": "Intro to MongoDB", "details": "Explain what MongoDB is with Node.js usage" },
+  { "title": "How the Internet Works for Developers", "details": "Simple overview for programmers" },
+  { "title": "Version Control with Git", "details": "Git basics and essential commands" },
+  { "title": "HTML & CSS for Beginners", "details": "Basic structure and simple style example" },
+  { "title": "Debugging JavaScript", "details": "Common errors and how to fix them" },
+  { "title": "Deploying Your Node App", "details": "Basic steps to deploy on Render or Vercel" }
+]

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Blog Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 700px;
+      margin: 60px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #007bff;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+    button {
+      margin-top: 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    pre {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Blog Generator 🧠</h1>
+
+    <label for="title">Blog Title</label>
+    <input type="text" id="title" placeholder="e.g. Intro to Node.js" />
+
+    <label for="details">Details</label>
+    <textarea id="details" rows="3" placeholder="Explain what Node.js is and how it works."></textarea>
+
+    <button id="generateBtn">Generate Blog</button>
+
+    <h3>Generated Blog:</h3>
+    <pre id="output"></pre>
+  </div>
+
+  <script>
+    document.getElementById("generateBtn").addEventListener("click", async () => {
+      const title = document.getElementById("title").value.trim();
+      const details = document.getElementById("details").value.trim();
+      const output = document.getElementById("output");
+
+      if (!title || !details) {
+        output.textContent = "⚠️ Please fill both title and details!";
+        return;
+      }
+
+      output.textContent = "⏳ Generating blog, please wait...";
+
+      try {
+        const res = await fetch("/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ blogs: [{ title, details }] }),
+        });
+
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+
+        output.textContent = data[0]?.content || "No content generated!";
+      } catch (err) {
+        console.error(err);
+        output.textContent = "❌ Error: " + err.message;
+      }
+    });
+  </script>
+</body>
+</html>
